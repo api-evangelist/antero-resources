@@ -4,88 +4,57 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Antero Resources
 providerId: antero-resources
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Energy
   - Natural Gas
-  - NGL
-  - Oil And Gas
-  - Upstream
+  - Public Filings
+  - SEC EDGAR
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Antero Resources API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: >-
+  Antero Resources does not operate a first-party API. The reachable data
+  surface (SEC EDGAR for CIK 0001433270) is throttled by the SEC's published
+  fair-access policy: 10 requests per second, with a User-Agent header
+  identifying the consumer required on every call. Limits apply to the SEC
+  endpoint, not to Antero itself.
+notes: >-
+  Limits below are SEC EDGAR's published fair-access policy. Consumers must
+  set a descriptive User-Agent (typically `Sample Company Name
+  contact@email.com`) per the SEC's developer guidance.
+sources:
+  - https://www.sec.gov/os/accessing-edgar-data
+  - https://www.sec.gov/developer
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  userAgent: User-Agent
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: SEC EDGAR Fair-Access Limit
+    scope: IP
+    metric: requests_per_second
     limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Antero Resources SEC EDGAR Filings
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Antero Resources SEC EDGAR Filings
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Antero Resources SEC EDGAR Filings
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Antero Resources SEC EDGAR Filings
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Antero Resources SEC EDGAR Filings
+    timeFrame: second
+    notes: >-
+      Applies to all data.sec.gov and www.sec.gov endpoints. Exceeding the
+      limit results in HTTP 429 / 403 responses; a descriptive User-Agent
+      header is required on every request.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: User-Agent Required
+    description: >-
+      The SEC requires every EDGAR API request to include a User-Agent header
+      identifying the consumer (e.g. `Acme Corp ops@acme.com`). Requests
+      without a meaningful User-Agent may be blocked.
+  - name: Fair-Access Throttling
+    description: >-
+      The SEC enforces a soft 10 requests-per-second ceiling per IP across
+      EDGAR endpoints. Sustained excess traffic can result in temporary IP
+      blocks; back off on 429.
+  - name: Cache-Friendly
+    description: >-
+      EDGAR encourages caching of immutable filing artifacts; the
+      submissions JSON is updated incrementally so consumers can poll daily
+      rather than per-second.
 maintainers:
-  - FN: Kin Lane
+  - FN: API Evangelist
     email: info@apievangelist.com
-    X: apievangelist
-    url: https://apievangelist.com
