@@ -5,7 +5,7 @@ description: >-
   properties in the Appalachian Basin (West Virginia and Ohio). It is one of
   the largest natural gas producers in the United States, with operations
   focused on the Marcellus and Utica Shale formations.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/antero-resources/refs/heads/main/apis.yml
 created: "2026-03-23"
 modified: "2026-04-19"
@@ -24,7 +24,7 @@ apis:
       other regulatory disclosures with the U.S. Securities and Exchange
       Commission. These filings are accessible via the SEC EDGAR full-text
       search API and the EDGAR data APIs for machine-readable financial data.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001433270&type=&dateb=&owner=include&count=40
     baseURL: https://data.sec.gov/submissions/CIK0001433270.json
     tags:
