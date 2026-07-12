@@ -48,6 +48,8 @@ maintainers:
     X: apievangelist
     url: https://apievangelist.com
 common:
+  - type: DomainSecurity
+    url: security/antero-resources-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/antero-resources
   - type: Portal
@@ -56,3 +58,5 @@ common:
     url: https://www.anteroresources.com/legal/terms-and-conditions
   - type: PrivacyPolicy
     url: https://www.anteroresources.com/legal/privacy-policy
+  - url: https://www.anteroresources.com/news-events/press-releases/rss
+    type: Blog
