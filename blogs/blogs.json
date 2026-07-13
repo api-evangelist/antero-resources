@@ -1,0 +1,14 @@
+{
+  "repo": "antero-resources",
+  "feeds": [
+    {
+      "source": "https://www.anteroresources.com/news-events/press-releases/rss",
+      "feed_url": "https://www.anteroresources.com/news-events/press-releases/rss",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 10
+}
