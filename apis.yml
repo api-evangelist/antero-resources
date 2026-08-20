@@ -26,6 +26,12 @@ tags:
   - Energy
   - Natural Gas
   - NGL
+  - Oil and Gas
+  - Upstream
+tags_raw:
+  - Energy
+  - Natural Gas
+  - NGL
   - Oil And Gas
   - Upstream
 apis:
@@ -40,6 +46,12 @@ apis:
     humanURL: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001433270&type=&dateb=&owner=include&count=40
     baseURL: https://data.sec.gov/submissions/CIK0001433270.json
     tags:
+      - Energy
+      - Financial Data
+      - Natural Gas
+      - Oil and Gas
+      - SEC Filings
+    tags_raw:
       - Energy
       - Financial Data
       - Natural Gas
