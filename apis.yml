@@ -37,7 +37,7 @@ tags:
   - Energy
   - Natural Gas
   - NGL
-  - Oil and Gas
+  - Oil And Gas
   - Upstream
 tags_raw:
   - Energy
@@ -60,7 +60,7 @@ apis:
       - Energy
       - Financial Data
       - Natural Gas
-      - Oil and Gas
+      - Oil And Gas
       - SEC Filings
     tags_raw:
       - Energy
