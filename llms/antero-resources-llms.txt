@@ -1,0 +1,72 @@
+# Antero Resources
+
+> Antero Resources Corporation (NYSE: AR, SEC CIK 0001433270) is an independent
+> oil and natural gas company exploring for, developing and producing natural
+> gas, NGLs and oil in the Appalachian Basin — the Marcellus and Utica Shale of
+> West Virginia and Ohio. It is one of the largest natural gas and NGL producers
+> in the United States. It is NOT a software company: it publishes no developer
+> program, no API, no SDK and no machine-readable service contract.
+
+## What an agent can and cannot do here
+
+- There is **no Antero Resources API**. As of 2026-09-02 no OpenAPI, AsyncAPI,
+  GraphQL, gRPC, WSDL, MCP server or A2A agent card is served on any Antero
+  host. `/openapi.json`, `/swagger.json`, `/api-docs`, `/llms.txt` and every
+  named `/.well-known/` path return HTTP 404 on www.anteroresources.com.
+- The only machine-readable surface carrying Antero data is **SEC EDGAR**,
+  operated by the U.S. Securities and Exchange Commission — not by Antero.
+- Everything Antero itself publishes is a web page, a PDF, or an RSS feed.
+
+## Machine-readable data about Antero (third-party, SEC-operated)
+
+- [EDGAR submissions JSON](https://data.sec.gov/submissions/CIK0001433270.json):
+  filing index for CIK 0001433270 — form type, filing date, accession number,
+  primary document. HTTP 200, `application/json`.
+- [EDGAR XBRL company facts](https://data.sec.gov/api/xbrl/companyfacts/CIK0001433270.json):
+  every Inline XBRL fact Antero has tagged, across the dei, srt, us-gaap and ecd
+  taxonomies (454 distinct us-gaap concepts). HTTP 200, `application/json`.
+- [EDGAR full-text search](https://efts.sec.gov/LATEST/search-index?q=%22antero+resources%22):
+  Elasticsearch-shaped JSON over filing text. HTTP 200.
+- [EDGAR API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
+  and [Accessing EDGAR Data](https://www.sec.gov/os/accessing-edgar-data).
+
+### Access rules for those endpoints (SEC policy, not Antero's)
+
+- Max request rate: **10 requests/second** per the SEC's published fair-access policy.
+- A descriptive `User-Agent` header identifying the caller is **required** on every
+  request (e.g. `Sample Company Name admin@example.com`); requests without one may be blocked.
+- Filings are immutable once published — cache them and poll the submissions index
+  daily rather than per filing.
+- See `rate-limits/antero-resources-rate-limits.yml` in this repo.
+
+## Antero Resources' own published surfaces
+
+- [Corporate site](https://www.anteroresources.com)
+- [Investors](https://www.anteroresources.com/investors)
+- [SEC filings (IR mirror)](https://www.anteroresources.com/investors/sec-filings)
+- [Press releases](https://www.anteroresources.com/news-events/press-releases)
+- [Press release RSS feed](https://www.anteroresources.com/news-events/press-releases/rss) — HTTP 200, `text/xml`
+- [Owner relations](https://www.anteroresources.com/owner-relations) — royalty/interest owner forms, PDF only
+- [Sustainability](https://www.anteroresources.com/sustainability)
+- [Contact us](https://www.anteroresources.com/contact-us)
+- [Terms & conditions](https://www.anteroresources.com/terms-and-conditions)
+- [Privacy notice](https://www.anteroresources.com/privacy-notice)
+- [Legal notice](https://www.anteroresources.com/legal-notice)
+
+## Optional
+
+- [API Evangelist profile artifacts](https://github.com/api-evangelist/antero-resources):
+  `apis.yml` (APIs.json), `well-known/` (the 404 probe record), `conformance/`,
+  `rate-limits/`, `plans/`, `finops/`, `security/` (domain security probe),
+  `press/`, `blogs/`.
+- Stock quote data on the IR site is rendered by QuoteMedia (qmod.quotemedia.com);
+  it is a vendor widget, not an Antero endpoint.
+
+---
+generated: 2026-09-02
+method: generated
+source: apis.yml + repo artifacts + live probes of anteroresources.com and data.sec.gov
+note: >-
+  Antero Resources serves no /llms.txt of its own (HTTP 404 on 2026-09-02).
+  This file is authored by API Evangelist from the catalog record and from
+  probes, and is published in the API Evangelist repo — not on Antero's host.

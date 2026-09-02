@@ -6,8 +6,10 @@ providerId: antero-resources
 created: '2026-05-04'
 # Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
 # bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+method: searched
+generated: '2026-09-02'
+source: https://www.sec.gov/os/accessing-edgar-data
+modified: '2026-09-02'
 reconciled: true
 tags:
   - Energy
@@ -61,3 +63,30 @@ policies:
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
+x-evidence:
+  checked: '2026-09-02'
+  probes:
+    - url: https://www.sec.gov/os/accessing-edgar-data
+      status: 200
+      observed: >-
+        Verbatim from the SEC page - "Fair access. Current max request rate: 10
+        requests/second." and "Please declare your user agent in request
+        headers", with the sample header "User-Agent: Sample Company Name
+        AdminContact@<sample company domain>.com".
+    - url: https://data.sec.gov/submissions/CIK0001433270.json
+      status: 200
+      observed: >-
+        Antero's filing index served without authentication; no RateLimit-*,
+        X-RateLimit-* or Retry-After headers are published by the SEC, so a
+        client has no runtime limit signal and must self-throttle to the
+        documented 10 req/sec.
+    - url: https://www.anteroresources.com/openapi.json
+      status: 404
+      observed: >-
+        Antero Resources operates no API of its own, so it publishes no rate
+        limits of its own. Every limit in this file is the SEC's.
+x-provenance-note: >-
+  Upgraded generated -> searched on 2026-09-02: the 10 req/sec ceiling and the
+  User-Agent requirement were read verbatim from the SEC's own published
+  fair-access policy rather than assumed by the bulk sweep. The limits still
+  belong to the SEC endpoint, not to Antero Resources.

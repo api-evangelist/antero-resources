@@ -1,0 +1,80 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Antero Resources
+providerId: antero-resources
+generated: '2026-09-02'
+method: probed
+source: live HTTP GET of the named /.well-known/ paths on every apis.yml host (2026-09-02)
+description: >-
+  Probe record of the RFC 8615 /.well-known/ namespace on every host named in
+  apis.yml — the Antero Resources corporate host and the two SEC EDGAR hosts
+  that serve the company's filings. Every named path 404s. No WellKnown or
+  SecurityTxt pointer is wired in apis.yml, because nothing was served: this
+  file records a verified ABSENCE, not a presence.
+notes: >-
+  www.anteroresources.com answers 404 with a ~32KB HTML error page for every
+  /.well-known/ path, so no path returned a document. data.sec.gov is an S3
+  origin and returns an XML NoSuchKey 404. The SEC hosts are operated by the
+  U.S. Securities and Exchange Commission, not by Antero Resources, so a hit
+  there would not have been an Antero-published surface in any case.
+hosts:
+  - host: www.anteroresources.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: data.sec.gov
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: www.sec.gov
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+other_probes:
+  - url: https://www.anteroresources.com/robots.txt
+    status: 200
+    note: >-
+      Served. Two lines - "User-agent: *" and "Disallow: /form-submit". No AI
+      or agent directives, no sitemap directive (the sitemap is nonetheless
+      served at /sitemap.xml, HTTP 200).
+  - url: https://www.anteroresources.com/llms.txt
+    status: 404
+  - url: https://www.anteroresources.com/openapi.json
+    status: 404
+  - url: https://www.anteroresources.com/swagger.json
+    status: 404
+  - url: https://www.anteroresources.com/api-docs
+    status: 404
+maintainers:
+  - FN: API Evangelist
+    email: info@apievangelist.com

@@ -1,0 +1,103 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Antero Resources
+providerId: antero-resources
+generated: '2026-09-02'
+method: probed
+source: >-
+  Live fetches of the SEC EDGAR endpoints that serve Antero Resources'
+  disclosures, plus the SEC's own published access policy (2026-09-02).
+description: >-
+  Antero Resources Corporation (NYSE: AR, CIK 0001433270) publishes no API of
+  its own, so there is no first-party contract to assert web-API standards
+  against. What it does conform to is the disclosure standard its market
+  actually runs on: every periodic report it files with the SEC is tagged in
+  Inline XBRL against the US GAAP and DEI taxonomies, and the SEC republishes
+  those tagged facts as machine-readable JSON. That is the only
+  domain-standard conformance evidenced here, and the evidence is a fetched
+  200 rather than a marketing claim.
+notes: >-
+  IMPORTANT PROVENANCE NOTE - the endpoints cited below are operated by the
+  U.S. Securities and Exchange Commission, not by Antero Resources. What
+  belongs to Antero is the FILING (the Inline XBRL instance documents and the
+  taxonomy tagging inside them); the transport, the JSON projection and the
+  access policy belong to the SEC. Nothing here should be read as Antero
+  publishing an API.
+conformance:
+  - id: xbrl
+    name: XBRL / Inline XBRL (US GAAP + DEI taxonomies)
+    conforms: true
+    domain_standard: true
+    sector: financial-disclosure
+    evidence:
+      url: https://data.sec.gov/api/xbrl/companyfacts/CIK0001433270.json
+      status: 200
+      observed: >-
+        entityName "ANTERO RESOURCES CORPORATION"; fact taxonomies present in
+        the document are dei, srt, us-gaap and ecd, with 454 distinct us-gaap
+        concepts tagged across the filing history.
+      note: >-
+        SEC-mandated for a large accelerated filer; Antero's own filings carry
+        the tagging, which is what makes the company's financials machine
+        readable at all.
+  - id: sec-edgar-submissions
+    name: SEC EDGAR submissions JSON (data.sec.gov)
+    conforms: true
+    domain_standard: false
+    evidence:
+      url: https://data.sec.gov/submissions/CIK0001433270.json
+      status: 200
+      observed: >-
+        cik 0001433270, entityType "operating", sic 1311 "Crude Petroleum &
+        Natural Gas", tickers ["AR"], exchanges ["NYSE"], category "Large
+        accelerated filer"; filing index current to 2026-08-06.
+      note: >-
+        Third-party (SEC) transport of Antero's filings. Counted as a
+        reachable machine-readable data surface ABOUT the company, not as an
+        Antero-published contract.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence:
+      url: https://www.anteroresources.com/.well-known/oauth-authorization-server
+      status: 404
+      observed: No authorization server metadata; no OAuth surface of any kind.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence:
+      url: https://www.anteroresources.com/.well-known/openid-configuration
+      status: 404
+      observed: No OIDC discovery document.
+  - id: rfc9457
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence:
+      url: https://www.anteroresources.com/openapi.json
+      status: 404
+      observed: No OpenAPI, therefore no declared problem+json error envelope.
+  - id: rfc8615-well-known
+    name: RFC 8615 /.well-known/ registry
+    conforms: false
+    evidence:
+      url: https://www.anteroresources.com/.well-known/api-catalog
+      status: 404
+      observed: >-
+        Every named /.well-known/ path 404s on the corporate host. See
+        well-known/antero-resources-well-known.yml.
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence:
+      url: https://www.anteroresources.com/.well-known/security.txt
+      status: 404
+      observed: Not served; no coordinated vulnerability disclosure contact published.
+certifications: []
+certifications_note: >-
+  No trust center, no SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP attestation
+  page was found on anteroresources.com. probe-security-programs.py returned
+  vdp=none trust=none on 2026-09-02, so no Compliance or TrustCenter pointer
+  is wired.
+maintainers:
+  - FN: API Evangelist
+    email: info@apievangelist.com

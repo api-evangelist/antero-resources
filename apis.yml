@@ -31,7 +31,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/antero-resources.png
 url: https://raw.githubusercontent.com/api-evangelist/antero-resources/refs/heads/main/apis.yml
 created: "2026-03-23"
-modified: "2026-04-19"
+modified: "2026-09-02"
 specificationVersion: '0.23'
 tags:
   - Energy
@@ -70,9 +70,9 @@ apis:
       - SEC Filings
     properties:
       - type: Documentation
-        url: https://efts.sec.gov/LATEST/search-index?q=%22antero+resources%22&dateRange=custom&startdt=2020-01-01&enddt=2026-04-19&forms=10-K
+        url: https://www.sec.gov/os/accessing-edgar-data
       - type: APIReference
-        url: https://data.sec.gov/submissions/CIK0001433270.json
+        url: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
     contact:
       - FN: SEC EDGAR Support
         url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001433270
@@ -87,11 +87,44 @@ common:
     url: security/antero-resources-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/antero-resources
-  - type: Portal
+  - type: Website
     url: https://www.anteroresources.com
   - type: TermsOfService
-    url: https://www.anteroresources.com/legal/terms-and-conditions
+    url: https://www.anteroresources.com/terms-and-conditions
   - type: PrivacyPolicy
-    url: https://www.anteroresources.com/legal/privacy-policy
+    url: https://www.anteroresources.com/privacy-notice
   - url: https://www.anteroresources.com/news-events/press-releases/rss
     type: Blog
+  - type: Support
+    url: https://www.anteroresources.com/contact-us
+  - type: LLMsTxt
+    url: llms/antero-resources-llms.txt
+  - type: Conformance
+    url: conformance/antero-resources-conformance.yml
+x-enrichment:
+  date: '2026-09-02'
+  status: minimal
+  artifacts_added: 3
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: >-
+    Antero Resources is an Appalachian Basin natural-gas and NGL producer whose
+    product is a hydrocarbon, not software; its entire web estate is 47 pages of
+    investor-relations HTML and PDF forms (its own sitemap.xml lists no
+    developer, API or integration page), and every contract-discovery path -
+    /openapi.json, /swagger.json, /api-docs, /llms.txt and all seven named
+    /.well-known/ paths - returns HTTP 404 on www.anteroresources.com.
+  evidence:
+    - url: https://www.anteroresources.com/openapi.json
+      status: 404
+    - url: https://www.anteroresources.com/.well-known/agent-card.json
+      status: 404
+    - url: https://www.anteroresources.com/llms.txt
+      status: 404
+    - url: https://www.anteroresources.com/sitemap.xml
+      status: 200
+    - url: https://data.sec.gov/submissions/CIK0001433270.json
+      status: 200
+  checked: '2026-09-02'
