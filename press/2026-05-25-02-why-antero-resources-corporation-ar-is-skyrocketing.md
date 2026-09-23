@@ -1,7 +1,9 @@
 ---
 title: Why Antero Resources Corporation (AR) Is Skyrocketing ...
 url: https://finance.yahoo.com/news/why-antero-resources-corporation-ar-112447343.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Antero Resources" press release artificial intelligence'
 position: 2
 source: serpapi-google
