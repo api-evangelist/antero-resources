@@ -83,6 +83,12 @@ maintainers:
     X: apievangelist
     url: https://apievangelist.com
 common:
+  - type: Plans
+    url: plans/antero-resources-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/antero-resources-rate-limits.yml
+  - type: FinOps
+    url: finops/antero-resources-finops.yml
   - type: DomainSecurity
     url: security/antero-resources-domain-security.yml
   - type: LinkedIn
