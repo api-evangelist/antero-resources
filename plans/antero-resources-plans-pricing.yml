@@ -1,0 +1,73 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Antero Resources
+providerId: antero-resources
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Energy
+  - Natural Gas
+  - Public Filings
+  - SEC EDGAR
+description: >-
+  Antero Resources (NYSE: AR) does not publish a first-party developer API or
+  pricing catalog. The data surface tracked by api-evangelist is the SEC EDGAR
+  filings endpoint for CIK 0001433270, which is operated by the U.S.
+  Securities and Exchange Commission and is free to access for the public,
+  with no API plan tiers or per-request fees.
+notes: >-
+  Pricing is governed by the SEC EDGAR free-public-data policy, not by Antero
+  Resources. There is no Antero-issued plan tier.
+sources:
+  - https://www.sec.gov/edgar
+  - https://data.sec.gov/submissions/CIK0001433270.json
+  - https://www.sec.gov/os/accessing-edgar-data
+plans:
+  - id: antero-resources-sec-edgar-public
+    name: SEC EDGAR Public Filings
+    type: freemium
+    description: >-
+      Free public access to Antero Resources' SEC filings via data.sec.gov.
+      Operated and priced by the SEC, not by Antero. No subscription, no
+      metered fee, no enterprise SKU.
+    entries:
+      - label: EDGAR Submissions Endpoint
+        description: Antero Resources filings JSON via data.sec.gov
+        name: edgar_submissions
+        type: flat
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '$0'
+        userMultiplied: false
+    elements:
+      - name: 10-K / 10-Q / 8-K Filings
+      - name: Proxy Statements
+      - name: Insider Transactions
+      - name: Free Public Access
+maintainers:
+  - FN: API Evangelist
+    email: info@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - request
+  plans:
+  - name: SEC EDGAR Public Filings
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - request
+    periods:
+    - per-use
